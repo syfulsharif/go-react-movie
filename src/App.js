@@ -1,5 +1,8 @@
+import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 function App() {
+  const [jwtToken, setJWTToken] = useState("");
+
   return (
     <div className="container">
       <div className="row">
@@ -7,9 +10,15 @@ function App() {
           <h1 className="mt-3">Go Watch a Movie!</h1>
         </div>
         <div className="col text-end">
-          <Link to="/login" href="#!">
-            <span className="badge bg-success">Login</span>
-          </Link>
+          {jwtToken === "" ? (
+            <Link to="/login" href="#!">
+              <span className="badge bg-success">Login</span>
+            </Link>
+          ) : (
+            <a href="#!">
+              <span className="badge bg-danger">Logout</span>
+            </a>
+          )}
         </div>
       </div>
       <hr className="md-3"></hr>
@@ -32,24 +41,28 @@ function App() {
               >
                 Genres
               </Link>
-              <Link
-                to="/add-movie"
-                className="list-group-item list-group-item-action"
-              >
-                Add Movies
-              </Link>
-              <Link
-                to="/manage-catalogue"
-                className="list-group-item list-group-item-action"
-              >
-                Manage Catalogue
-              </Link>
-              <Link
-                to="/graphql"
-                className="list-group-item list-group-item-action"
-              >
-                GraphQL
-              </Link>
+              {jwtToken !== "" && (
+                <>
+                  <Link
+                    to="/add-movie"
+                    className="list-group-item list-group-item-action"
+                  >
+                    Add Movies
+                  </Link>
+                  <Link
+                    to="/manage-catalogue"
+                    className="list-group-item list-group-item-action"
+                  >
+                    Manage Catalogue
+                  </Link>
+                  <Link
+                    to="/graphql"
+                    className="list-group-item list-group-item-action"
+                  >
+                    GraphQL
+                  </Link>
+                </>
+              )}
             </div>
           </nav>
         </div>
