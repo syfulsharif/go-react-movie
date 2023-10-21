@@ -33,7 +33,7 @@ function App() {
                 Genres
               </Link>
               <Link
-                to="/add-movies"
+                to="/add-movie"
                 className="list-group-item list-group-item-action"
               >
                 Add Movies
